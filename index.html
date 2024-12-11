@@ -19,7 +19,7 @@
             transition: background-color 0.3s, color 0.3s;
         }
         .container {
-            padding: 40px 60px;
+            padding: 20px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
             border-radius: 12px;
             background-color: var(--container-bg);
@@ -58,12 +58,37 @@
             font-size: 0.9em;
             color: var(--text-color-secondary);
         }
+        .game {
+            margin-top: 40px;
+        }
+        .board {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-gap: 5px;
+        }
+        .cell {
+            width: 100px;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2em;
+            background-color: var(--cell-bg);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .cell:hover {
+            background-color: var(--cell-bg-hover);
+        }
         :root {
             --bg-color: #f8f9fa;
             --text-color: #343a40;
             --text-color-secondary: #6c757d;
             --container-bg: #ffffff;
             --link-color: #007bff;
+            --cell-bg: #dee2e6;
+            --cell-bg-hover: #ced4da;
         }
         [data-theme='dark'] {
             --bg-color: #343a40;
@@ -71,6 +96,8 @@
             --text-color-secondary: #ced4da;
             --container-bg: #495057;
             --link-color: #66b2ff;
+            --cell-bg: #6c757d;
+            --cell-bg-hover: #5a6268;
         }
     </style>
 </head>
@@ -83,6 +110,20 @@
             <p>For inquiries, please contact us at <a href="mailto:info@example.com">info@example.com</a></p>
             <p>Follow us on <a href="https://twitter.com/yourhandle" target="_blank">Twitter</a> and <a href="https://facebook.com/yourpage" target="_blank">Facebook</a> for updates.</p>
         </div>
+        <div class="game">
+            <h2>Play Tic-Tac-Toe</h2>
+            <div class="board" id="board">
+                <div class="cell" data-cell></div>
+                <div class="cell" data-cell></div>
+                <div class="cell" data-cell></div>
+                <div class="cell" data-cell></div>
+                <div class="cell" data-cell></div>
+                <div class="cell" data-cell></div>
+                <div class="cell" data-cell></div>
+                <div class="cell" data-cell></div>
+                <div class="cell" data-cell></div>
+            </div>
+        </div>
     </div>
     <div class="footer">
         <p>&copy; 2024 Website made by Dot</p>
@@ -92,6 +133,72 @@
             const currentTheme = document.documentElement.getAttribute('data-theme');
             const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
             document.documentElement.setAttribute('data-theme', newTheme);
+        }
+
+        const X_CLASS = 'x';
+        const O_CLASS = 'o';
+        const cellElements = document.querySelectorAll('[data-cell]');
+        const board = document.getElementById('board');
+        let oTurn;
+
+        const WINNING_COMBINATIONS = [
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+            [0, 3, 6],
+            [1, 4, 7],
+            [2, 5, 8],
+            [0, 4, 8],
+            [2, 4, 6]
+        ];
+
+        startGame();
+
+        function startGame() {
+            oTurn = false;
+            cellElements.forEach(cell => {
+                cell.classList.remove(X_CLASS);
+                cell.classList.remove(O_CLASS);
+                cell.removeEventListener('click', handleClick);
+                cell.addEventListener('click', handleClick, { once: true });
+            });
+        }
+
+        function handleClick(e) {
+            const cell = e.target;
+            const currentClass = oTurn ? O_CLASS : X_CLASS;
+            placeMark(cell, currentClass);
+            if (checkWin(currentClass)) {
+                setTimeout(() => alert(`${currentClass.toUpperCase()} Wins!`), 10);
+                startGame();
+            } else if (isDraw()) {
+                setTimeout(() => alert('Draw!'), 10);
+                startGame();
+            } else {
+                swapTurns();
+            }
+        }
+
+        function placeMark(cell, currentClass) {
+            cell.classList.add(currentClass);
+        }
+
+        function swapTurns() {
+            oTurn = !oTurn;
+        }
+
+        function checkWin(currentClass) {
+            return WINNING_COMBINATIONS.some(combination => {
+                return combination.every(index => {
+                    return cellElements[index].classList.contains(currentClass);
+                });
+            });
+        }
+
+        function isDraw() {
+            return [...cellElements].every(cell => {
+                return cell.classList.contains(X_CLASS) || cell.classList.contains(O_CLASS);
+            });
         }
     </script>
 </body>
