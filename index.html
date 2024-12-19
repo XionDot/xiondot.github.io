@@ -20,23 +20,27 @@
             height: 100vh;
             transition: background-color 0.3s, color 0.3s;
         }
+
         .container {
             text-align: center;
-            width: 600px; /* Fixed width */
-            height: 400px; /* Fixed height */
+            width: 600px; /* Fixed width for desktop */
+            height: 400px; /* Fixed height for desktop */
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
+
         .profile {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
+
         .profile-left {
             display: flex;
             align-items: center;
         }
+
         .profile-left img {
             border-radius: 50%;
             width: 100px;
@@ -44,28 +48,34 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             margin-right: 20px;
         }
+
         .profile-info {
             text-align: left;
         }
+
         .name {
             font-size: 2em;
             margin: 0;
         }
+
         .handle {
             font-size: 1.2em;
             color: #8ab4f8;
             margin: 5px 0;
         }
+
         .pronouns, .location {
             font-size: 1em;
             color: #b0b0b0;
             margin: 3px 0;
         }
+
         .links {
             display: flex;
             flex-direction: column;
             align-items: center;
         }
+
         .links a {
             color: #8ab4f8;
             text-decoration: none;
@@ -73,9 +83,11 @@
             transition: color 0.3s;
             font-size: 1.5em;
         }
+
         .links a:hover {
             color: #66a3ff;
         }
+
         .bio {
             font-size: 1.2em;
             color: #b0b0b0;
@@ -83,6 +95,7 @@
             line-height: 1.6;
             min-height: 50px; /* Ensure space for typing effect */
         }
+
         footer {
             width: 100%;
             text-align: center;
@@ -91,6 +104,7 @@
             font-size: 0.9em;
             color: #b0b0b0;
         }
+
         .theme-toggle {
             position: fixed;
             top: 10px;
@@ -103,25 +117,68 @@
             transition: color 0.3s;
             padding: 0;
         }
+
         .theme-toggle:hover {
             color: #66a3ff;
         }
+
         .light-mode {
             background-color: #ffffff;
             color: #000000;
         }
+
         .light-mode .pronouns, .light-mode .location, .light-mode .bio, .light-mode footer {
             color: #333333;
         }
+
         .light-mode .handle, .light-mode .links a, .light-mode .theme-toggle {
             color: #007bff;
         }
+
         .light-mode .theme-toggle {
             border-color: #007bff;
         }
+
         .light-mode .theme-toggle:hover {
             color: #0056b3;
             border-color: #0056b3;
+        }
+
+        /* Media query for mobile devices */
+        @media (max-width: 768px) {
+            .container {
+                width: 90%; /* Adjust width for mobile */
+                height: auto; /* Allow height to adjust based on content */
+            }
+
+            .profile-left img {
+                width: 80px; /* Smaller profile image for mobile */
+                height: 80px; /* Smaller profile image for mobile */
+            }
+
+            .name {
+                font-size: 1.5em; /* Smaller name font size for mobile */
+            }
+
+            .handle {
+                font-size: 1em; /* Smaller handle font size for mobile */
+            }
+
+            .links a {
+                font-size: 1.2em; /* Smaller link font size for mobile */
+            }
+
+            .bio {
+                font-size: 1em; /* Smaller bio font size for mobile */
+            }
+
+            footer {
+                font-size: 0.8em; /* Smaller footer font size for mobile */
+            }
+
+            .theme-toggle {
+                font-size: 1.2em; /* Smaller theme toggle font size for mobile */
+            }
         }
     </style>
 </head>
