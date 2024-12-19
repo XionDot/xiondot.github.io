@@ -201,27 +201,26 @@
                 themeToggleBtn.innerHTML = '<i class="fas fa-lightbulb"></i>';
             }
         }
-
-        // Function to type out text with a delay for each sentence
+        // Function to type out text with a delay for each word
         function typeText(text, elementId, delay) {
-            const element = document.getElementById(elementId);
-            const sentences = text.split('. '); // Split text into sentences
-            let index = 0;
+        const element = document.getElementById(elementId);
+        const words = text.split(' '); // Split text into words
+        let index = 0;
 
-            function typeSentence() {
-                if (index < sentences.length) {
-                    element.innerHTML += sentences[index] + '.<br>'; // Add sentence and line break
-                    index++;
-                    setTimeout(typeSentence, delay); // Delay before typing the next sentence
-                }
+        function typeWord() {
+            if (index < words.length) {
+                element.innerHTML += words[index] + ' '; // Add word and a space
+                index++;
+                setTimeout(typeWord, delay); // Delay before typing the next word
             }
-            typeSentence(); // Start typing
         }
+        typeWord(); // Start typing
+    }
 
-        // Bio text to be displayed
-        const bioText = "HiHi, I'm Ahmed, I am a SysAdmin with 3 years of experience. I specialize in System Administration & Cybersecurity, Currently, I am looking for new opportunities in Threat Intelligence. For contact info and/or CV, please check out the icons above. Thanks!";
-        typeText(bioText, 'bio', 300); // Typing effect with 100ms delay
-    </script>
+    // Bio text to be displayed
+    const bioText = "HiHi, I'm Ahmed, I am a SysAdmin with 3 years of experience. I specialize in System Administration & Cybersecurity, Currently, I am looking for new opportunities in Threat Intelligence. For contact info and/or CV, please check out the icons above. Thanks!";
+    typeText(bioText, 'bio', 200); // Typing effect with 200ms delay
+</script>
     <!-- Watermark: Coded by Ahmed - www.r0ot.co -->
 
 </body>
