@@ -80,6 +80,7 @@
             color: #b0b0b0;
             margin-top: 20px;
             line-height: 1.6;
+            min-height: 50px; /* Ensure space for typing effect */
         }
         footer {
             width: 100%;
@@ -121,10 +122,15 @@
             color: #0056b3;
             border-color: #0056b3;
         }
+        .graphic {
+            width: 100%; /* Adjust as needed */
+            max-width: 400px; /* Limit max width */
+            margin: 20px 0; /* Space around graphic */
+        }
     </style>
 </head>
 <body>
-    <!-- Watermark: Coded by Ahmed - www.r0ot.co -->
+    <!-- Water mark: Coded by Ahmed - www.r0ot.co -->
 
     <button class="theme-toggle" onclick="toggleTheme()"><i class="fas fa-lightbulb"></i></button>
     <div class="container">
@@ -143,13 +149,8 @@
                 <a href="https://www.linkedin.com/in/ahmed-z1" target="_blank"><i class="fab fa-linkedin"></i></a>
             </div>
         </div>
-        <!-- Watermark: Coded by Ahmed - www.r0ot.co -->
-        <div class="bio">
-            HiHi, I'm Ahmed. I am a SysAdmin with 3 years of experience.<br>
-            I specialize in System Administration & Cybersecurity.<br>
-            Currently, I am looking for new opportunities in Threat Intelligence.<br>
-            For contact info and/or CV, please check out the icons above. Thanks!
-        </div>
+        <img src="graphic.png" alt="Graphic" class="graphic"> <!-- Placeholder for graphic -->
+        <div class="bio" id="bio"></div>
     </div>
     <footer>
         &copy; 2024 Ahmed Z, All rights reserved.
@@ -164,8 +165,25 @@
                 themeToggleBtn.innerHTML = '<i class="fas fa-lightbulb"></i>';
             }
         }
+
+        function typeText(text, elementId, delay) {
+            const element = document.getElementById(elementId);
+            let index = 0;
+
+            function type() {
+                if (index < text.length) {
+                    element.innerHTML += text.charAt(index);
+                    index++;
+                    setTimeout(type, delay);
+                }
+            }
+            type();
+        }
+
+        const bioText = "HiHi, I'm Ahmed. I am a SysAdmin with 3 years of experience. I specialize in System Administration & Cybersecurity. Currently, I am looking for new opportunities in Threat Intelligence. For contact info and/or CV, please check out the icons above. Thanks!";
+        typeText(bioText, 'bio', 50); // Typing effect with 50ms delay
     </script>
     <!-- Watermark: Coded by Ahmed - www.r0ot.co -->
 
 </body>
-</html>
+</html> 
