@@ -5,8 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A Z | SysAdmin</title>
+    <!-- Link to Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        /* Basic styling for the body */
         body {
             margin: 0;
             padding: 0;
@@ -14,28 +16,35 @@
             background-color: #121212;
             color: #e0e0e0;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
             transition: background-color 0.3s, color 0.3s;
         }
+
+        /* Container for the profile and bio */
         .container {
             text-align: center;
-            max-width: 800px;
+            width: 600px; /* Fixed width */
+            height: 400px; /* Fixed height */
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: auto; /* Allow scrolling if content exceeds */
         }
+
+        /* Profile section styling */
         .profile {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
+
         .profile-left {
             display: flex;
             align-items: center;
         }
+
         .profile-left img {
             border-radius: 50%;
             width: 100px;
@@ -43,28 +52,37 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             margin-right: 20px;
         }
+
         .profile-info {
             text-align: left;
         }
+
+        /* Name and handle styling */
         .name {
             font-size: 2em;
             margin: 0;
         }
+
         .handle {
             font-size: 1.2em;
             color: #8ab4f8;
             margin: 5px 0;
         }
+
+        /* Location and pronouns styling */
         .pronouns, .location {
             font-size: 1em;
             color: #b0b0b0;
             margin: 3px 0;
         }
+
+        /* Links section styling */
         .links {
             display: flex;
             flex-direction: column;
             align-items: center;
         }
+
         .links a {
             color: #8ab4f8;
             text-decoration: none;
@@ -72,9 +90,12 @@
             transition: color 0.3s;
             font-size: 1.5em;
         }
+
         .links a:hover {
             color: #66a3ff;
         }
+
+        /* Bio section styling */
         .bio {
             font-size: 1.2em;
             color: #b0b0b0;
@@ -82,6 +103,8 @@
             line-height: 1.6;
             min-height: 50px; /* Ensure space for typing effect */
         }
+
+        /* Footer styling */
         footer {
             width: 100%;
             text-align: center;
@@ -90,6 +113,8 @@
             font-size: 0.9em;
             color: #b0b0b0;
         }
+
+        /* Theme toggle button styling */
         .theme-toggle {
             position: fixed;
             top: 10px;
@@ -102,37 +127,43 @@
             transition: color 0.3s;
             padding: 0;
         }
+
         .theme-toggle:hover {
             color: #66a3ff;
         }
+
+        /* Light mode styling */
         .light-mode {
             background-color: #ffffff;
             color: #000000;
         }
+
         .light-mode .pronouns, .light-mode .location, .light-mode .bio, .light-mode footer {
             color: #333333;
         }
+
         .light-mode .handle, .light-mode .links a, .light-mode .theme-toggle {
             color: #007bff;
         }
+
         .light-mode .theme-toggle {
             border-color: #007bff;
         }
+
         .light-mode .theme-toggle:hover {
-            color: #0056b3;
+            color: #0056b3 ;
             border-color: #0056b3;
         }
-        .graphic {
-            width: 100%; /* Adjust as needed */
-            max-width: 400px; /* Limit max width */
-            margin: 20px 0; /* Space around graphic */
-        }
+
     </style>
 </head>
 <body>
-    <!-- Water mark: Coded by Ahmed - www.r0ot.co -->
+    <!-- Watermark: Coded by Ahmed - www.r0ot.co -->
 
+    <!-- Theme toggle button -->
     <button class="theme-toggle" onclick="toggleTheme()"><i class="fas fa-lightbulb"></i></button>
+    
+    <!-- Main container for profile and bio -->
     <div class="container">
         <div class="profile">
             <div class="profile-left">
@@ -144,20 +175,26 @@
                 </div>
             </div>
             <div class="links">
+                <!-- Social media links -->
                 <a href="https://github.com/xiondot" target="_blank"><i class="fab fa-github"></i></a>
                 <a href="mailto:hamadazit@gmail.com"><i class="fas fa-envelope"></i></a>
                 <a href="https://www.linkedin.com/in/ahmed-z1" target="_blank"><i class="fab fa-linkedin"></i></a>
             </div>
         </div>
-        <div class="bio" id="bio"></div>
+        <div class="bio" id="bio"></div> <!-- Bio section -->
     </div>
+    
+    <!-- Footer section -->
     <footer>
         &copy; 2024 Ahmed Z, All rights reserved.
     </footer>
+    
     <script>
+        // Function to toggle between light and dark themes
         function toggleTheme() {
             document.body.classList.toggle('light-mode');
             const themeToggleBtn = document.querySelector('.theme-toggle');
+            // Change icon based on the current theme
             if (document.body.classList.contains('light-mode')) {
                 themeToggleBtn.innerHTML = '<i class="fas fa-moon"></i>';
             } else {
@@ -165,24 +202,27 @@
             }
         }
 
+        // Function to type out text with a delay for each sentence
         function typeText(text, elementId, delay) {
             const element = document.getElementById(elementId);
+            const sentences = text.split('. '); // Split text into sentences
             let index = 0;
 
-            function type() {
-                if (index < text.length) {
-                    element.innerHTML += text.charAt(index);
+            function typeSentence() {
+                if (index < sentences.length) {
+                    element.innerHTML += sentences[index] + '.<br>'; // Add sentence and line break
                     index++;
-                    setTimeout(type, delay);
+                    setTimeout(typeSentence, delay); // Delay before typing the next sentence
                 }
             }
-            type();
+            typeSentence(); // Start typing
         }
 
+        // Bio text to be displayed
         const bioText = "HiHi, I'm Ahmed. I am a SysAdmin with 3 years of experience. I specialize in System Administration & Cybersecurity. Currently, I am looking for new opportunities in Threat Intelligence. For contact info and/or CV, please check out the icons above. Thanks!";
-        typeText(bioText, 'bio', 50); // Typing effect with 50ms delay
+        typeText(bioText, 'bio', 100); // Typing effect with 100ms delay
     </script>
     <!-- Watermark: Coded by Ahmed - www.r0ot.co -->
 
 </body>
-</html> 
+</html>
